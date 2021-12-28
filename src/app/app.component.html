@@ -15,14 +15,30 @@
     type="text"
     class="input-text"
     placeholder="Type a todo"
+    [(ngModel)]="todoValue" 
+    (keyup.enter)="addItem()" 
   >
-  <button class="add-btn">Add Todo</button>
+  <!-- 
+    `ngModel` is a FormControl instance from the FormsModule imported in app.module.ts
+    `keyup` event is fired when a key is released,
+    `.enter` checks for when the enter key is pressed
+  -->
+  <button class="add-btn" (click)="addItem()">Add Todo</button>
   <div class="list">
     <ul>
-      <li>
-        <input type="checkbox" name="isDone" />
-        Task 1
-        <button class="btn">Delete</button>
+      <!-- loop through each Todo item in the list -->
+      <li *ngFor="let item of list"> 
+        <!-- 
+          link the checkbox state to item.isDone,
+          this works without the `name` attribute... why do we need it? 
+        -->
+        <input 
+          type="checkbox" 
+          name="isDone"
+          [(ngModel)]="item.isDone"
+        />
+        {{item.value}}
+        <button class="btn" (click)="deleteItem(item.id)">Delete</button>
       </li>
     </ul>
   </div>
