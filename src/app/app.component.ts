@@ -8,13 +8,21 @@ import { Todo } from './todo';
 export class AppComponent {
   title = 'Angular Todo';
 
+  // Initializing these here is fine
   todoValue: string = "";
   list: Todo[] = [];
 
-  ngOnInit(){ // angular lifecyle method
-    this.todoValue = ""; 
-    this.list = [];
-  }
+  // Can also use a constructor which is called during object creation
+  // and before the component is mounted
+  // constructor(){
+  //   this.todoValue = ""; 
+  //   this.list = [];
+  // }
+
+  // ngOnInit() is a lifecycle method called after the constructor
+  // this is where you may want to perform more complex initializations
+  // like data fetching.
+  // https://angular.io/guide/lifecycle-hooks
 
   addItem(){
     if (this.todoValue !== "") {
